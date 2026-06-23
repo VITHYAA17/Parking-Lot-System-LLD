@@ -39,8 +39,8 @@ public class FloorRepository {
             floorNumberToId.remove(floor.getFloorNumber());
         }
     }
-    public void clear(0{
+    public void clear(){
         floors.clear();
         floorNumberToId.clear();
-    })
+    }
 }
