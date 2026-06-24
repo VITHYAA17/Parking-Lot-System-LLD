@@ -17,15 +17,15 @@ public class PricingService {
         System.out.println("[Service] Calculating the see for the ticket : "+ticket);
         Vehicle.VehicleType vehicleType = Vehicle.VehicleType.CAR;
 
-        Optional<PrincingRule> rule = pricingRuleRepository;
+        Optional<PricingRule> rule = pricingRuleRepository.findByVehicleType(vehicleType);
         if(rule.isEmpty()){
             throw new IllegalStateException("No pricing Rule found for the vehicle Type: "+vehicleType);
         }
 
-        PricingRule pricingRule = rules.get();
+        PricingRule pricingRule = rule.get();
 
         double flatFee = pricingRule.getFlatRate();
-        double hourlyFee = calculateHourlyFee(ticket, pricingRule.getRatePerHour);
+        double hourlyFee = calculateHourlyFee(ticket, pricingRule.getRatePerHour());
 
         double finalFee = Math.min(flatFee, hourlyFee);
 
